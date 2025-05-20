@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Vacation</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+    .page {
+      display: none;
+      width: 100%; height: 100%;
+      box-sizing: border-box;
+      background: #000;
+      color: #fff;
+      position: relative;
+    }
+    .page.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Zoom pages except selection and thank-you */
+    .page.active:not(#page2):not(#thankYouPage) {
+      zoom: 5;
+    }
+    /* Galaxy background on home & selection pages */
+    #page1.active, #page2.active {
+      background: url('images/galaxy.jfif') no-repeat center center;
+      background-size: cover;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin: 5px;
+      cursor: pointer;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    h1, h2 { color: #fff; }
+    .split { display: flex; width: 100%; height: 100%; }
+    .side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      color: #fff;
+    }
+    .planet-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    .planet {
+      margin: 10px;
+      text-align: center;
+    }
+    .planet .label {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-top: 4px;
+    }
+    #loadingMsg {
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+    #atmText {
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+    #planetImg, #planetImgDisc {
+      max-width: 30%;
+      height: auto;
+      margin-bottom: 20px;
+      border: 2px solid #fff;
+      border-radius: 8px;
+    }
+      /* Loading page galaxy background */
+    #loadingPage.active {
+      background: url('images/galaxy.jfif') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1: Book a Trip -->
+  <div id="page1" class="page active">
+    <h1>BOOK A TRIP</h1>
+    <button onclick="showPage('page2')">Book Now</button>
+  </div>
+
+  <!-- Page 2: Planet Selection -->
+  <div id="page2" class="page">
+    <div class="split">
+      <div class="side">
+        <h2>Inner Solar System</h2>
+        <div class="planet-btns">
+          <div class="planet">
+            <button onclick="planetClick('mercury')">Mercury</button>
+            <div class="label">Coming Soon</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('venus')">Venus</button>
+            <div class="label">Go Now</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('earth')">Earth</button>
+            <div class="label">You live here</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('mars')">Mars</button>
+            <div class="label">Coming Soon</div>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <h2>Outer Solar System</h2>
+        <div class="planet-btns">
+          <div class="planet">
+            <button onclick="planetClick('jupiter')">Jupiter</button>
+            <div class="label">Coming Soon</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('saturn')">Saturn</button>
+            <div class="label">Coming Soon</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('uranus')">Uranus</button>
+            <div class="label">Go Now</div>
+          </div>
+          <div class="planet">
+            <button onclick="planetClick('neptune')">Neptune</button>
+            <div class="label">Coming Soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Page -->
+  <div id="loadingPage" class="page">
+    <h2 id="loadingTitle"></h2>
+    <div id="loadingMsg">Loading your journey…</div>
+  </div>
+
+  <!-- Name Origin Page -->
+  <div id="originPage" class="page">
+    <img id="planetImg" src="" alt="Planet photo">
+    <h2 id="originTitle"></h2>
+    <p id="originText"></p>
+    <button onclick="showDiscoverer()">OK</button>
+  </div>
+
+  <!-- Discoverer Page -->
+  <div id="discovererPage" class="page">
+    <img id="planetImgDisc" src="" alt="Planet photo">
+    <h2 id="discTitle"></h2>
+    <p id="discText"></p>
+    <button onclick="showFacts()">OK</button>
+  </div>
+
+  <!-- Facts Page -->
+  <div id="factsPage" class="page">
+    <h2 id="factsTitle"></h2>
+    <ul id="factsList"></ul>
+    <button onclick="showAtmosphere()">OK</button>
+  </div>
+
+  <!-- Atmosphere Page -->
+  <div id="atmospherePage" class="page">
+    <h2 id="atmTitle"></h2>
+    <div id="atmText"></div>
+    <button onclick="showConfirm()">OK</button>
+  </div>
+
+  <!-- Confirm Flight Page -->
+  <div id="confirmPage" class="page">
+    <h2 id="confirmTitle"></h2>
+    <pre id="confirmDetails"></pre>
+    <button onclick="bookTrip()">Book</button>
+  </div>
+
+  <!-- Thank You Page -->
+  <div id="thankYouPage" class="page">
+    <h1>THANK YOU FOR BOOKING.</h1>
+    <p>Your trip leaves in:</p>
+    <h2 id="countdown"></h2>
+    <button onclick="restart()">Book Another Flight</button>
+  </div>
+
+  <script>
+    let selectedPlanet = '';
+    let departureDate;
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function planetClick(name) {
+      if (['venus','uranus'].includes(name)) {
+        selectedPlanet = name;
+        startLoading();
+      } else if (name === 'earth') {
+        alert('You live here!');
+      } else {
+        alert('Coming soon!');
+      }
+    }
+
+    function startLoading() {
+      showPage('loadingPage');
+      document.getElementById('loadingTitle').textContent =
+        `Preparing trip to ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      const msgs = {
+        venus: ['Fact: Venus is hotter than Mercury though farther from the Sun.',
+               'Fact: Its clouds are sulfuric acid, not water.'],
+        uranus:['Fact: It has a 90° tilt.',
+               'Fact: On Uranus the Sun rises in the west and sets in the east.']
+      };
+      const msgEl = document.getElementById('loadingMsg');
+      msgEl.textContent = 'Loading your journey…';
+      setTimeout(() => msgEl.textContent = msgs[selectedPlanet][0], 10000);
+      setTimeout(() => msgEl.textContent = msgs[selectedPlanet][1], 20000);
+      setTimeout(prepareOrigin, 30000);
+    }
+
+    function prepareOrigin() {
+      const origins = {
+        venus: 'Venus is named after the Roman goddess of love and beauty.',
+        uranus: 'Uranus is named after the Greek god of the sky, Ouranos.'
+      };
+      // Set title and text
+      document.getElementById('originTitle').textContent =
+        `Name Origin: ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      document.getElementById('originText').textContent = origins[selectedPlanet];
+      // Load correct planet image
+      let imgUrl;
+      if (selectedPlanet === 'venus') imgUrl = 'images/Venus.jpg';
+      else if (selectedPlanet === 'uranus') imgUrl = 'images/uranus.jpg';
+      else imgUrl = `images/${selectedPlanet}.jpg`;
+      document.getElementById('planetImg').src = imgUrl;
+      document.getElementById('planetImgDisc').src = imgUrl;
+      showPage('originPage');
+    }
+    }
+
+    function showDiscoverer() {
+      const disc = {
+        venus: 'Discovered by Galileo in 1610.',
+        uranus: 'Discovered by William Herschel on March 13, 1781.'
+      };
+      document.getElementById('discTitle').textContent =
+        `Discovery of ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      document.getElementById('discText').textContent = disc[selectedPlanet];
+      showPage('discovererPage');
+    }
+
+    function showFacts() {
+      const data = {
+        venus: ['One day is 243 Earth days.', 'One year is 225 days.', 'Gravity is 91% of Earth\'s.', 'Has no moons.'],
+        uranus: ['One day is 17h 14m.', 'One year is 84 Earth years.', 'Gravity is 86% of Earth\'s.', 'Has 28 moons.']
+      };
+      document.getElementById('factsTitle').textContent =
+        `Things to know about ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      const ul = document.getElementById('factsList'); ul.innerHTML = '';
+      data[selectedPlanet].forEach(item => {
+        const li = document.createElement('li'); li.textContent = item; ul.appendChild(li);
+      });
+      showPage('factsPage');
+    }
+
+    function showAtmosphere() {
+      const atmData = {
+        venus: ['CO₂: 96.5%', 'N₂: 3.5%'],
+        uranus:['H₂: 82.5%', 'He: 15.2%', 'CH₄: 2.3%']
+      };
+      document.getElementById('atmTitle').textContent =
+        `Atmosphere of ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      document.getElementById('atmText').innerHTML = atmData[selectedPlanet].join('<br>');
+      showPage('atmospherePage');
+    }
+
+    function showConfirm() {
+      const details = {
+        venus: 'Destination: Venus\nDistance: 0.24 AU\nEstimated flight time: 32 days',
+        uranus: 'Destination: Uranus\nDistance: 20.54 AU\nEstimated flight time: 9.5 years'
+      };
+      document.getElementById('confirmTitle').textContent =
+        `Confirm your flight to ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
+      document.getElementById('confirmDetails').textContent = details[selectedPlanet];
+      showPage('confirmPage');
+    }
+
+    function bookTrip() {
+      showPage('thankYouPage');
+      departureDate = new Date();
+      departureDate.setDate(departureDate.getDate() + 712);
+      departureDate.setHours(departureDate.getHours() + 18);
+      departureDate.setMinutes(departureDate.getMinutes() + 6);
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      let diff = departureDate - now;
+      if (diff < 0) diff = 0;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * 1000 * 60 * 60 * 24;
+      const hours = Math.floor(diff / (1000 * 60 * 60)); diff -= hours * 1000 * 60 * 60;
+      const mins = Math.floor(diff / (1000 * 60));
+      document.getElementById('countdown').textContent = `${days} days ${hours} hours ${mins} mins`;
+    }
+
+    function restart() { location.reload(); }
+  </script>
+</body>
+</html>
