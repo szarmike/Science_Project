@@ -8,7 +8,8 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: #000;
       color: #fff;
       font-family: sans-serif;
@@ -16,7 +17,8 @@
     }
     .page {
       display: none;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       box-sizing: border-box;
       background: #000;
       color: #fff;
@@ -28,11 +30,7 @@
       align-items: center;
       justify-content: center;
     }
-    /* Zoom pages except selection and thank-you */
-    .page.active:not(#page2):not(#thankYouPage) {
-      zoom: 5;
-    }
-    /* Galaxy background on home & selection pages */
+    /* Galaxy background on home & selection */
     #page1.active, #page2.active {
       background: url('images/galaxy.jfif') no-repeat center center;
       background-size: cover;
@@ -47,7 +45,9 @@
       border: none;
       border-radius: 4px;
     }
-    h1, h2 { color: #fff; }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2rem; }
+    p, li { font-size: 1rem; }
     .split { display: flex; width: 100%; height: 100%; }
     .side {
       flex: 1;
@@ -56,7 +56,6 @@
       align-items: center;
       justify-content: center;
       background: #000;
-      color: #fff;
     }
     .planet-btns {
       display: flex;
@@ -64,137 +63,81 @@
       justify-content: center;
       width: 100%;
     }
-    .planet {
-      margin: 10px;
-      text-align: center;
-    }
-    .planet .label {
-      font-size: 0.9rem;
-      color: #fff;
-      margin-top: 4px;
-    }
-    #loadingMsg {
-      font-size: 1.2rem;
-      margin-top: 20px;
-    }
-    #atmText {
-      font-size: 1rem;
-      margin-top: 20px;
-    }
-    #planetImg, #planetImgDisc {
-      max-width: 30%;
-      height: auto;
-      margin-bottom: 20px;
-      border: 2px solid #fff;
-      border-radius: 8px;
-    }
-      /* Loading page galaxy background */
+    .planet { margin: 10px; text-align: center; }
+    .label { font-size: 0.9rem; color: #fff; margin-top: 4px; }
+    /* Loading background uses galaxy */
     #loadingPage.active {
       background: url('images/galaxy.jfif') no-repeat center center;
       background-size: cover;
-      color: #fff;
     }
+    #loadingMsg { font-size: 1.2rem; margin-top: 20px; }
+    #atmText { font-size: 1rem; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <!-- Page 1: Book a Trip -->
   <div id="page1" class="page active">
     <h1>BOOK A TRIP</h1>
     <button onclick="showPage('page2')">Book Now</button>
   </div>
 
-  <!-- Page 2: Planet Selection -->
   <div id="page2" class="page">
     <div class="split">
       <div class="side">
         <h2>Inner Solar System</h2>
         <div class="planet-btns">
-          <div class="planet">
-            <button onclick="planetClick('mercury')">Mercury</button>
-            <div class="label">Coming Soon</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('venus')">Venus</button>
-            <div class="label">Go Now</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('earth')">Earth</button>
-            <div class="label">You live here</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('mars')">Mars</button>
-            <div class="label">Coming Soon</div>
-          </div>
+          <div class="planet"><button onclick="planetClick('mercury')">Mercury</button><div class="label">Coming Soon</div></div>
+          <div class="planet"><button onclick="planetClick('venus')">Venus</button><div class="label">Go Now</div></div>
+          <div class="planet"><button onclick="planetClick('earth')">Earth</button><div class="label">You live here</div></div>
+          <div class="planet"><button onclick="planetClick('mars')">Mars</button><div class="label">Coming Soon</div></div>
         </div>
       </div>
       <div class="side">
         <h2>Outer Solar System</h2>
         <div class="planet-btns">
-          <div class="planet">
-            <button onclick="planetClick('jupiter')">Jupiter</button>
-            <div class="label">Coming Soon</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('saturn')">Saturn</button>
-            <div class="label">Coming Soon</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('uranus')">Uranus</button>
-            <div class="label">Go Now</div>
-          </div>
-          <div class="planet">
-            <button onclick="planetClick('neptune')">Neptune</button>
-            <div class="label">Coming Soon</div>
-          </div>
+          <div class="planet"><button onclick="planetClick('jupiter')">Jupiter</button><div class="label">Coming Soon</div></div>
+          <div class="planet"><button onclick="planetClick('saturn')">Saturn</button><div class="label">Coming Soon</div></div>
+          <div class="planet"><button onclick="planetClick('uranus')">Uranus</button><div class="label">Go Now</div></div>
+          <div class="planet"><button onclick="planetClick('neptune')">Neptune</button><div class="label">Coming Soon</div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Loading Page -->
   <div id="loadingPage" class="page">
     <h2 id="loadingTitle"></h2>
     <div id="loadingMsg">Loading your journey…</div>
   </div>
 
-  <!-- Name Origin Page -->
   <div id="originPage" class="page">
-    <img id="planetImg" src="" alt="Planet photo">
     <h2 id="originTitle"></h2>
     <p id="originText"></p>
     <button onclick="showDiscoverer()">OK</button>
   </div>
 
-  <!-- Discoverer Page -->
   <div id="discovererPage" class="page">
-    <img id="planetImgDisc" src="" alt="Planet photo">
     <h2 id="discTitle"></h2>
     <p id="discText"></p>
     <button onclick="showFacts()">OK</button>
   </div>
 
-  <!-- Facts Page -->
   <div id="factsPage" class="page">
     <h2 id="factsTitle"></h2>
     <ul id="factsList"></ul>
     <button onclick="showAtmosphere()">OK</button>
   </div>
 
-  <!-- Atmosphere Page -->
   <div id="atmospherePage" class="page">
     <h2 id="atmTitle"></h2>
     <div id="atmText"></div>
     <button onclick="showConfirm()">OK</button>
   </div>
 
-  <!-- Confirm Flight Page -->
   <div id="confirmPage" class="page">
     <h2 id="confirmTitle"></h2>
     <pre id="confirmDetails"></pre>
     <button onclick="bookTrip()">Book</button>
   </div>
 
-  <!-- Thank You Page -->
   <div id="thankYouPage" class="page">
     <h1>THANK YOU FOR BOOKING.</h1>
     <p>Your trip leaves in:</p>
@@ -203,12 +146,26 @@
   </div>
 
   <script>
-    let selectedPlanet = '';
-    let departureDate;
+    let selectedPlanet = '', departureDate;
 
     function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.zoom = ''; });
+      const page = document.getElementById(id);
+      // set planet background on detail pages
+      if (['originPage','discovererPage','factsPage','atmospherePage','confirmPage','thankYouPage'].includes(id) && selectedPlanet) {
+        let bgUrl = '';
+        if (selectedPlanet === 'venus') bgUrl = 'images/Venus.jpg';
+        else if (selectedPlanet === 'uranus') bgUrl = 'images/uranus.jpg';
+        page.style.background = `url('${bgUrl}') no-repeat center center`;
+        page.style.backgroundSize = 'cover';
+      }
+      // zoom logic
+      if (id === 'originPage' && selectedPlanet === 'venus') {
+        page.style.zoom = '33%';
+      } else if (id !== 'page2' && id !== 'thankYouPage') {
+        page.style.zoom = '500%';
+      }
+      page.classList.add('active');
     }
 
     function planetClick(name) {
@@ -228,12 +185,11 @@
         `Preparing trip to ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
       const msgs = {
         venus: ['Fact: Venus is hotter than Mercury though farther from the Sun.',
-               'Fact: Its clouds are sulfuric acid, not water.'],
-        uranus:['Fact: It has a 90° tilt.',
-               'Fact: On Uranus the Sun rises in the west and sets in the east.']
+                'Fact: Its clouds are sulfuric acid, not water.'],
+        uranus: ['Fact: It has a 90° tilt.',
+                 'Fact: On Uranus the Sun rises in the west and sets in the east.']
       };
-      const msgEl = document.getElementById('loadingMsg');
-      msgEl.textContent = 'Loading your journey…';
+      const msgEl = document.getElementById('loadingMsg'); msgEl.textContent = 'Loading your journey…';
       setTimeout(() => msgEl.textContent = msgs[selectedPlanet][0], 10000);
       setTimeout(() => msgEl.textContent = msgs[selectedPlanet][1], 20000);
       setTimeout(prepareOrigin, 30000);
@@ -244,19 +200,10 @@
         venus: 'Venus is named after the Roman goddess of love and beauty.',
         uranus: 'Uranus is named after the Greek god of the sky, Ouranos.'
       };
-      // Set title and text
       document.getElementById('originTitle').textContent =
         `Name Origin: ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
       document.getElementById('originText').textContent = origins[selectedPlanet];
-      // Load correct planet image
-      let imgUrl;
-      if (selectedPlanet === 'venus') imgUrl = 'images/Venus.jpg';
-      else if (selectedPlanet === 'uranus') imgUrl = 'images/uranus.jpg';
-      else imgUrl = `images/${selectedPlanet}.jpg`;
-      document.getElementById('planetImg').src = imgUrl;
-      document.getElementById('planetImgDisc').src = imgUrl;
       showPage('originPage');
-    }
     }
 
     function showDiscoverer() {
@@ -272,22 +219,20 @@
 
     function showFacts() {
       const data = {
-        venus: ['One day is 243 Earth days.', 'One year is 225 days.', 'Gravity is 91% of Earth\'s.', 'Has no moons.'],
-        uranus: ['One day is 17h 14m.', 'One year is 84 Earth years.', 'Gravity is 86% of Earth\'s.', 'Has 28 moons.']
+        venus: ['One day is 243 Earth days.', 'One year is 225 days.', "Gravity is 91% of Earth's.", 'Has no moons.'],
+        uranus: ['One day is 17h 14m.', 'One year is 84 Earth years.', "Gravity is 86% of Earth's.", 'Has 28 moons.']
       };
       document.getElementById('factsTitle').textContent =
         `Things to know about ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
       const ul = document.getElementById('factsList'); ul.innerHTML = '';
-      data[selectedPlanet].forEach(item => {
-        const li = document.createElement('li'); li.textContent = item; ul.appendChild(li);
-      });
+      data[selectedPlanet].forEach(item => { const li = document.createElement('li'); li.textContent = item; ul.appendChild(li); });
       showPage('factsPage');
     }
 
     function showAtmosphere() {
       const atmData = {
         venus: ['CO₂: 96.5%', 'N₂: 3.5%'],
-        uranus:['H₂: 82.5%', 'He: 15.2%', 'CH₄: 2.3%']
+        uranus: ['H₂: 82.5%', 'He: 15.2%', 'CH₄: 2.3%']
       };
       document.getElementById('atmTitle').textContent =
         `Atmosphere of ${selectedPlanet.charAt(0).toUpperCase() + selectedPlanet.slice(1)}`;
@@ -312,16 +257,12 @@
       departureDate.setDate(departureDate.getDate() + 712);
       departureDate.setHours(departureDate.getHours() + 18);
       departureDate.setMinutes(departureDate.getMinutes() + 6);
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+      updateCountdown(); setInterval(updateCountdown, 1000);
     }
 
     function updateCountdown() {
-      const now = new Date();
-      let diff = departureDate - now;
-      if (diff < 0) diff = 0;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      diff -= days * 1000 * 60 * 60 * 24;
+      const now = new Date(); let diff = departureDate - now; if (diff < 0) diff = 0;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24)); diff -= days * 1000 * 60 * 60 * 24;
       const hours = Math.floor(diff / (1000 * 60 * 60)); diff -= hours * 1000 * 60 * 60;
       const mins = Math.floor(diff / (1000 * 60));
       document.getElementById('countdown').textContent = `${days} days ${hours} hours ${mins} mins`;

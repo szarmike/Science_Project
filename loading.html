@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="5;url=selection.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('images/galaxy.jfif') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+      font-family: sans-serif;
+    }
+    h2, p {
+      margin: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="loadingTitle">Preparing your trip...</h2>
+  <p id="loadingMsg">Loading your journey…</p>
+  <script>
+    // Fallback JS redirect after 5 seconds
+    setTimeout(() => {
+      window.location.replace('selection.html');
+    }, 4000);
+  </script>
+</body>
+</html>
