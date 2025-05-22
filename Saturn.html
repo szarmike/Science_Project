@@ -1,49 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Saturn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saturn Details</title>
   <style>
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: url('images/saturn.jpg') no-repeat center center;
-      background-size: cover;
-      color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      margin-top: 0;
-    }
-    section {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    .btn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+    body { margin:0; padding:2rem; background:url('images/saturn.jpg') no-repeat center center; background-size:cover; color:#fff; font-family:sans-serif; }
+    h1 { margin-top:0; }
+    section { background:rgba(0,0,0,0.6); padding:1rem; border-radius:8px; margin-bottom:1rem; }
+    ul { padding-left:1.2rem; }
+    .btn { margin-top:1rem; padding:0.5rem 1rem; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; }
   </style>
 </head>
 <body>
-  <h1>Saturn</h1>
-  <p>Saturn is famous for its extensive ring system and is the second-largest planet.</p>
-  <ul>
-    <li>Average distance from Earth: 1.2 billion km</li>
-    <li>Orbital period: 29 Earth years</li>
-    <li>Day length: 10.7 Earth hours</li>
-    <li>Rings made of ice and rock</li>
-  </ul>
+  <section>
+    <h1>Saturn</h1>
+    <p><strong>Name Origin:</strong> Saturn is named after the Roman god of agriculture.</p>
+    <p><strong>Known since:</strong> Observed by ancient astronomers.</p>
+    <p><strong>Average distance from Earth:</strong> 886 million miles</p>
+  </section>
+  <section>
+    <h2>Things to know:</h2>
+    <ul>
+      <li>One day is 10h 33m.</li>
+      <li>One year is 29.46 Earth years.</li>
+      <li>Gravity is 107% of Earth's.</li>
+      <li>Has 82 known moons.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Atmosphere:</h2>
+    <p>H₂: 96.3%</p>
+    <p>He: 3.25%</p>
+  </section>
   <button class="btn" onclick="window.location.href='flight.html'">Book Flight</button>
 </body>
 </html>

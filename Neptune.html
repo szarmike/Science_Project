@@ -1,49 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Neptune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neptune Details</title>
   <style>
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: url('images/neptune.webp') no-repeat center center;
-      background-size: cover;
-      color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      margin-top: 0;
-    }
-    section {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    .btn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+    body { margin:0; padding:2rem; background:url('images/neptune.jpg') no-repeat center center; background-size:cover; color:#fff; font-family:sans-serif; }
+    h1 { margin-top:0; }
+    section { background:rgba(0,0,0,0.6); padding:1rem; border-radius:8px; margin-bottom:1rem; }
+    ul { padding-left:1.2rem; }
+    .btn { margin-top:1rem; padding:0.5rem 1rem; background:#333; color:#fff; border:none; border-radius:4px; cursor:pointer; }
   </style>
 </head>
 <body>
-  <h1>Neptune</h1>
-  <p>Neptune is the farthest known planet in our Solar System with strong winds.</p>
-  <ul>
-    <li>Average distance from Earth: 4.3 billion km</li>
-    <li>Orbital period: 165 Earth years</li>
-    <li>Day length: 16 Earth hours</li>
-    <li>Known for supersonic wind speeds</li>
-  </ul>
-  <button onclick="window.location.href='selection.html'">Back to selection</button>
+  <section>
+    <h1>Neptune</h1>
+    <p><strong>Name Origin:</strong> Neptune is named after the Roman god of the sea.</p>
+    <p><strong>Discovered by:</strong> Johann Galle & Urbain Le Verrier in 1846.</p>
+    <p><strong>Average distance from Earth:</strong> 2.7 billion miles</p>
+  </section>
+  <section>
+    <h2>Things to know:</h2>
+    <ul>
+      <li>One day is 16h 6m.</li>
+      <li>One year is 164.8 Earth years.</li>
+      <li>Gravity is 114% of Earth's.</li>
+      <li>Has 14 known moons.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Atmosphere:</h2>
+    <p>H₂: 80%</p>
+    <p>He: 19%</p>
+    <p>CH₄: 1.5%</p>
+  </section>
+  <button class="btn" onclick="window.location.href='flight.html'">Book Flight</button>
 </body>
 </html>
